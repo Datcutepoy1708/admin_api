@@ -9,6 +9,10 @@ import { AppService } from './app.service';
 import { User } from './user/entities/user.entity';
 
 import { UserModule } from './user/auth.module';
+import { FaqModule } from './faq/faq.module';
+import { FaqController } from './faq/faq.controller';
+import { FaqService } from './faq/faq.service';
+import { Faq } from './faq/entities/faq.entity';
 
 @Module({
   imports: [
@@ -30,7 +34,7 @@ import { UserModule } from './user/auth.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [
-          User
+          User,Faq
         ],
         synchronize: true, // Auto generate schema from entities
       }),
@@ -49,6 +53,7 @@ import { UserModule } from './user/auth.module';
       }),
     }),
     UserModule,
+    FaqModule,
   ],
   controllers: [AppController],
   providers: [AppService],
