@@ -13,6 +13,9 @@ import { FaqModule } from './faq/faq.module';
 import { FaqController } from './faq/faq.controller';
 import { FaqService } from './faq/faq.service';
 import { Faq } from './faq/entities/faq.entity';
+import { ContactModule } from './contact/contact.module';
+import { Contact } from './contact/entities/contact.entity';
+
 
 @Module({
   imports: [
@@ -34,7 +37,7 @@ import { Faq } from './faq/entities/faq.entity';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [
-          User,Faq
+          User,Faq,Contact
         ],
         synchronize: true, // Auto generate schema from entities
       }),
@@ -54,6 +57,7 @@ import { Faq } from './faq/entities/faq.entity';
     }),
     UserModule,
     FaqModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],
