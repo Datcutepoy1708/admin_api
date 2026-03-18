@@ -34,6 +34,9 @@ export class AuthService {
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
+
+    console.log(passwordHash);
+
     const user = this.userRepository.create({
       fullName,
       email,
@@ -74,11 +77,16 @@ export class AuthService {
     })
 
     if (!user) {
+      console.log('User not found by email:', email);
       throw new UnauthorizedException('Invalid credentitals');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+
+    const isPasswordValid = await bcrypt.compare(password,user.passwordHash);
+
+
     if (!isPasswordValid) {
+      console.log('bcrypt compare failed for password:', password);
       throw new UnauthorizedException('Invalid credentials');
     }
 
