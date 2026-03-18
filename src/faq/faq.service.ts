@@ -85,7 +85,7 @@ export class FaqService {
 
     return {
       success: true,
-      message: `Reove successfully faq with id=${id}`
+      message: `Remove successfully faq with id=${id}`
     }
   }
 

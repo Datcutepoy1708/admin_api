@@ -27,6 +27,7 @@ export class ContactController {
   findOne(@Param('id') id: string) {
     return this.contactService.findOne(+id);
   }
-
+  
+  
 
 }
