@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -14,6 +15,16 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT') || 3000;
+
+  const config = new DocumentBuilder()
+    .setTitle('Admin API')
+    .setDescription('API documentation')
+    .setVersion('1.0')
+    .addBearerAuth() // ← hỗ trợ JWT token
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api-docs', app, document);
 
   // Global Prefix: /api
   app.setGlobalPrefix('api');
