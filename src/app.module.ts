@@ -18,6 +18,10 @@ import { Contact } from './contact/entities/contact.entity';
 import { ReviewModule } from './review/review.module';
 import { Review } from './review/entities/review.entity';
 
+import { EmployeesModule } from './employees/employees.module';
+import { UploadModule } from './upload/upload.module';
+import { Employee } from './employees/entities/employee.entity';
+
 
 @Module({
   imports: [
@@ -39,7 +43,7 @@ import { Review } from './review/entities/review.entity';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [
-          User,Faq,Contact,Review
+          User,Faq,Contact,Review,Employee
         ],
         synchronize: true, // Auto generate schema from entities
       }),
@@ -61,6 +65,8 @@ import { Review } from './review/entities/review.entity';
     FaqModule,
     ContactModule,
     ReviewModule,
+    EmployeesModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
