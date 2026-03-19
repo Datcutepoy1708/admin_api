@@ -10,7 +10,7 @@ export class EmployeesService {
   constructor(
     @InjectRepository(Employee)
     private readonly employeeRepository: Repository<Employee>,
-  ) { }
+  ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
     const newEmployee = this.employeeRepository.create(createEmployeeDto);
@@ -19,7 +19,7 @@ export class EmployeesService {
 
   async findAll() {
     return await this.employeeRepository.find({
-      order: { id: 'DESC' } // Sắp xếp nhân viên mới nhất lên đầu
+      order: { id: 'DESC' }, // Sắp xếp nhân viên mới nhất lên đầu
     });
   }
 

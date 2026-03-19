@@ -2,6 +2,7 @@ import { BadRequestException } from '@nestjs/common';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from 'fs';
+import { Request } from 'express';
 
 export const uploadDir = './public/uploads';
 
@@ -13,15 +14,28 @@ if (!fs.existsSync(uploadDir)) {
 export const multerOptions = {
   storage: diskStorage({
     destination: uploadDir,
-    filename: (req, file, cb) => {
+    filename: (
+      _req: Request,
+      file: Express.Multer.File,
+      cb: (error: Error | null, filename: string) => void,
+    ) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       const ext = extname(file.originalname);
       cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
     },
   }),
-  fileFilter: (req, file, cb) => {
+  fileFilter: (
+    _req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, acceptFile: boolean) => void,
+  ) => {
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
-      return cb(new BadRequestException('Chỉ chấp nhận file ảnh hợp lệ (jpg, png, webp,...)!'), false);
+      return cb(
+        new BadRequestException(
+          'Chỉ chấp nhận file ảnh hợp lệ (jpg, png, webp,...)!',
+        ),
+        false,
+      );
     }
     cb(null, true);
   },

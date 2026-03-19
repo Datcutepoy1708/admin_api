@@ -1,9 +1,9 @@
-import { IsBoolean, IsNotEmpty } from "class-validator";
+import { IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class CreateTechnologyDto {
-    @IsNotEmpty()
-    name: string
-    
-    @IsBoolean()
-    status?: boolean
+  @IsNotEmpty()
+  name: string;
+
+  @IsBoolean()
+  status?: boolean;
 }

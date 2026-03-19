@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Query,
+} from '@nestjs/common';
 import { FaqService } from './faq.service';
 import { CreateFaqDto } from './dto/create-faq.dto';
 import { UpdateFaqDto } from './dto/update-faq.dto';
@@ -7,7 +17,7 @@ import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 @UseGuards(JwtAuthGuard)
 @Controller('faq')
 export class FaqController {
-  constructor(private readonly faqService: FaqService) { }
+  constructor(private readonly faqService: FaqService) {}
 
   @Post()
   create(@Body() createFaqDto: CreateFaqDto) {
@@ -18,7 +28,7 @@ export class FaqController {
   findAll(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10,
-    @Query('search') search?: string
+    @Query('search') search?: string,
   ) {
     return this.faqService.findAll(+page, +limit, search);
   }

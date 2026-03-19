@@ -1,12 +1,12 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateEmployeeDto {
-    @IsNotEmpty()
-    fullName: string
+  @IsNotEmpty()
+  fullName: string;
 
-    @IsNotEmpty()
-    role: string
+  @IsNotEmpty()
+  role: string;
 
-    @IsOptional()
-    image?: string
+  @IsOptional()
+  image?: string;
 }

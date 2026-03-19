@@ -1,22 +1,27 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('review')
 export class Review {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ name: 'full_name' })
-    fullName: string
+  @Column({ name: 'full_name' })
+  fullName: string;
 
-    @Column({ name: 'job' })
-    job: string
+  @Column({ name: 'job' })
+  job: string;
 
-    @Column({ name: 'rate' })
-    rate: number
+  @Column({ name: 'rate' })
+  rate: number;
 
-    @Column({ name: 'comment', type: 'text' })
-    comment: string
+  @Column({ name: 'comment', type: 'text' })
+  comment: string;
 
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 }

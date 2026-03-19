@@ -10,8 +10,6 @@ import { User } from './user/entities/user.entity';
 
 import { UserModule } from './user/auth.module';
 import { FaqModule } from './faq/faq.module';
-import { FaqController } from './faq/faq.controller';
-import { FaqService } from './faq/faq.service';
 import { Faq } from './faq/entities/faq.entity';
 import { ContactModule } from './contact/contact.module';
 import { Contact } from './contact/entities/contact.entity';
@@ -24,7 +22,7 @@ import { Employee } from './employees/entities/employee.entity';
 import { ServicesModule } from './services/services.module';
 import { TechnologysModule } from './technologys/technologys.module';
 import { Technology } from './technologys/entities/technology.entity';
-
+import { Service } from './services/entities/service.entity';
 
 @Module({
   imports: [
@@ -45,9 +43,7 @@ import { Technology } from './technologys/entities/technology.entity';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [
-          User,Faq,Contact,Review,Employee,Technology
-        ],
+        entities: [User, Faq, Contact, Review, Employee, Technology,Service],
         synchronize: true, // Auto generate schema from entities
       }),
     }),
@@ -60,7 +56,7 @@ import { Technology } from './technologys/entities/technology.entity';
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: configService.get<string>('JWT_EXPIRES_IN') as any,
+          expiresIn: '7d',
         },
       }),
     }),
@@ -76,4 +72,4 @@ import { Technology } from './technologys/entities/technology.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
