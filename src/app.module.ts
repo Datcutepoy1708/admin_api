@@ -21,6 +21,9 @@ import { Review } from './review/entities/review.entity';
 import { EmployeesModule } from './employees/employees.module';
 import { UploadModule } from './upload/upload.module';
 import { Employee } from './employees/entities/employee.entity';
+import { ServicesModule } from './services/services.module';
+import { TechnologysModule } from './technologys/technologys.module';
+import { Technology } from './technologys/entities/technology.entity';
 
 
 @Module({
@@ -43,7 +46,7 @@ import { Employee } from './employees/entities/employee.entity';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [
-          User,Faq,Contact,Review,Employee
+          User,Faq,Contact,Review,Employee,Technology
         ],
         synchronize: true, // Auto generate schema from entities
       }),
@@ -67,6 +70,8 @@ import { Employee } from './employees/entities/employee.entity';
     ReviewModule,
     EmployeesModule,
     UploadModule,
+    ServicesModule,
+    TechnologysModule,
   ],
   controllers: [AppController],
   providers: [AppService],
