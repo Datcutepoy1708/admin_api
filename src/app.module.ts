@@ -25,6 +25,8 @@ import { Technology } from './technologys/entities/technology.entity';
 import { Service } from './services/entities/service.entity';
 import { ProductModule } from './product/product.module';
 import { Products } from './product/entities/product.entity';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/entities/category.entity';
 
 @Module({
   imports: [
@@ -45,7 +47,17 @@ import { Products } from './product/entities/product.entity';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User, Faq, Contact, Review, Employee, Technology,Service,Products],
+        entities: [
+          User,
+          Faq,
+          Contact,
+          Review,
+          Employee,
+          Technology,
+          Service,
+          Products,
+          Category,
+        ],
         synchronize: true, // Auto generate schema from entities
       }),
     }),
@@ -71,6 +83,7 @@ import { Products } from './product/entities/product.entity';
     ServicesModule,
     TechnologysModule,
     ProductModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

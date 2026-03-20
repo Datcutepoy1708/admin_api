@@ -1,5 +1,16 @@
-import { Technology } from "src/technologys/entities/technology.entity";
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Technology } from '../../technologys/entities/technology.entity';
+import { Category } from '../../category/entities/category.entity';
 
 @Entity('products')
 export class Products {
@@ -7,22 +18,24 @@ export class Products {
   id: number;
 
   @Column({ name: 'thumbnail', type: 'text' })
-  thumbnail: string;          // ảnh
+  thumbnail: string;
 
-  @Column({ name: 'category' })
-  category: string;           
   @Column({ name: 'title', type: 'text' })
-  title: string;              
+  title: string;
 
   @Column({ name: 'description', type: 'text' })
-  description: string;        // mô tả ngắn
+  description: string;
 
   @Column({ name: 'status', default: true })
   status: boolean;
 
+  @ManyToOne(() => Category, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
+
   @ManyToMany(() => Technology)
   @JoinTable({ name: 'product_technology' })
-  technologies: Technology[]; // Next.js, TypeScript, Stripe, AWS
+  technologies: Technology[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
