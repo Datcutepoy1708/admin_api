@@ -23,6 +23,9 @@ export class Products {
   @Column({ name: 'title', type: 'text' })
   title: string;
 
+  @Column({ name: 'slug', type: 'text' })
+  slug: string;
+
   @Column({ name: 'description', type: 'text' })
   description: string;
 

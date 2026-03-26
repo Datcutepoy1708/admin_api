@@ -6,6 +6,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Products } from './entities/product.entity';
 import { Technology } from '../technologys/entities/technology.entity';
 import { Category } from '../category/entities/category.entity';
+import slugify from 'slugify';
 
 @Injectable()
 export class ProductService {
@@ -22,6 +23,10 @@ export class ProductService {
 
   async create(createProductDto: CreateProductDto) {
     const { technologyIds, categoryId, ...rest } = createProductDto;
+
+    if (!rest.slug && rest.title) {
+      rest.slug = slugify(rest.title, { lower: true, strict: true });
+    }
 
     const technologies = technologyIds?.length
       ? await this.technologyRepository.findByIds(technologyIds)
@@ -71,6 +76,10 @@ export class ProductService {
     if (!product) throw new NotFoundException(`Product #${id} not found`);
 
     const { technologyIds, categoryId, ...rest } = updateProductDto;
+
+    if (rest.title && !rest.slug) {
+      rest.slug = slugify(rest.title, { lower: true, strict: true });
+    }
 
     if (technologyIds) {
       product.technologies =

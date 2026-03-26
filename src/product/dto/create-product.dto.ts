@@ -13,6 +13,10 @@ export class CreateProductDto {
   title: string;
 
   @IsString()
+  @IsOptional()
+  slug?: string;
+
+  @IsString()
   @IsNotEmpty()
   description: string;
 
